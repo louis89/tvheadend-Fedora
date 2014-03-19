@@ -1,0 +1,15 @@
+[Unit]
+Description=TVHeadEnd
+After=syslog.target network.target avahi-daemon.service sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb0.demux0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb0.dvr0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb0.frontend0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb0.net0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb1.demux0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb1.dvr0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb1.frontend0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb1.net0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-video4linux-vbi0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-video4linux-vbi1.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-video4linux-video0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-video4linux-video1.device
+Wants=sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb0.demux0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb0.dvr0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb0.frontend0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb0.net0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb1.demux0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb1.dvr0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb1.frontend0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-dvb-dvb1.net0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-video4linux-vbi0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-video4linux-vbi1.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-video4linux-video0.device sys-devices-pci0000:00-0000:00:1c.0-0000:05:00.0-video4linux-video1.device
+
+[Service]
+Type=forking
+GuessMainPID=no
+EnvironmentFile=/etc/sysconfig/tvheadend
+ExecStart=/usr/local/bin/tvheadend -f -u $TVH_USER -g $TVH_GROUP -p $TVH_PID -b $TVH_ADDRESS --http_port $TVH_HTTP_PORT --htsp_port $TVH_HTSP_PORT
+PIDFile=$TVH_PID
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

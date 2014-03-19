@@ -1,0 +1,13 @@
+# Configuration file for the tvheadend service.
+
+TVH_USER=hts
+
+TVH_GROUP=hts
+
+TVH_PID=/var/run/tvheadend.pid
+
+TVH_ADDRESS=0.0.0.0
+
+TVH_HTTP_PORT=9981
+
+TVH_HTSP_PORT=9982
